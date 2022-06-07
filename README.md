@@ -1,16 +1,30 @@
-# acdf_dw7_job_timer
+# Job Timer Application
 
-A new Flutter project.
+It's a new Flutter Project Job Timer app.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a new application developed by me, with Rodrigo Rahman of Academia do Flutter in Dart Week 7.
 
-A few resources to get you started if this is your first Flutter project:
+The application consists in a Job Timer developed in study of Dart and Flutter in Dart Week 7.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+In this aplication was used this packages:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[x] Bloc (state management)
+[x] Flutter Bloc (state management)
+[x] Modular (Flutterando)
+[x] Modular Bloc Bind (Flutterando)
+[x] Asuka (Personalized Snakbar and others by Flutterando)
+[x] Validatorless (Forms validators)
+[x] FL Chart (Powerfull Personalized Charts)
+[x] Firebase Core
+[x] Firebase Auth
+[x] Google Sign
+[x] Google Fonts
+[x] Isar (NoSQL local database)
+[x] Path Provider (Finder correct path in aplication)
+
+#Follow me in:
+>* [Twiter](https://twitter.com/RodevApp) 
+>* [LinkedIn](https://www.linkedin.com/in/rodrigoflores-rodevapp)
+>* [Github](https://github.com/rodevapp)

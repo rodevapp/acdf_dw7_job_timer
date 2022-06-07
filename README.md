@@ -10,19 +10,19 @@ The application consists in a Job Timer developed in study of Dart and Flutter i
 
 In this aplication was used this packages:
 
-[ x ] Bloc (state management)
-[ x ] Flutter Bloc (state management)
-[ x ] Modular (Flutterando)
-[ x ] Modular Bloc Bind (Flutterando)
-[ x ] Asuka (Personalized Snakbar and others by Flutterando)
-[ x ] Validatorless (Forms validators)
-[ x ] FL Chart (Powerfull Personalized Charts)
-[ x ] Firebase Core
-[ x ] Firebase Auth
-[ x ] Google Sign
-[ x ] Google Fonts
-[ x ] Isar (NoSQL local database)
-[ x ] Path Provider (Finder correct path in aplication)
+- [x] Bloc (state management)
+- [x] Flutter Bloc (state management)
+- [x] Modular (Flutterando)
+- [x] Modular Bloc Bind (Flutterando)
+- [x] Asuka (Personalized Snakbar and others by Flutterando)
+- [x] Validatorless (Forms validators)
+- [x] FL Chart (Powerfull Personalized Charts)
+- [x] Firebase Core
+- [x] Firebase Auth
+- [x] Google Sign
+- [x] Google Fonts
+- [x] Isar (NoSQL local database)
+- [x] Path Provider (Finder correct path in aplication)
 
 #Follow me in:
 >* [Twiter](https://twitter.com/RodevApp) 

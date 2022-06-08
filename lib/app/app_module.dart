@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:acdf_dw7_job_timer/app/modules/splash/splash_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

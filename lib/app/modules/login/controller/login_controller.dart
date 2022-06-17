@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:acdf_dw7_job_timer/app/services/auth_service.dart';
+import 'package:acdf_dw7_job_timer/app/services/auth/auth_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 

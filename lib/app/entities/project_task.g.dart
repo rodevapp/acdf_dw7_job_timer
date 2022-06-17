@@ -6,7 +6,7 @@ part of 'project_task.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable, no_leading_underscores_for_local_identifiers
 
 extension GetProjectTaskCollection on Isar {
   IsarCollection<ProjectTask> get projectTasks => getCollection();
@@ -15,9 +15,9 @@ extension GetProjectTaskCollection on Isar {
 const ProjectTaskSchema = CollectionSchema(
   name: 'ProjectTask',
   schema:
-      '{"name":"ProjectTask","idName":"id","properties":[{"name":"date","type":"Long"},{"name":"duration","type":"Long"},{"name":"name","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"ProjectTask","idName":"id","properties":[{"name":"date","type":"Long"},{"name":"duration","type":"Long"},{"name":"estimate","type":"Long"},{"name":"name","type":"String"}],"indexes":[],"links":[]}',
   idName: 'id',
-  propertyIds: {'date': 0, 'duration': 1, 'name': 2},
+  propertyIds: {'date': 0, 'duration': 1, 'estimate': 2, 'name': 3},
   listProperties: {},
   indexIds: {},
   indexValueTypes: {},
@@ -33,7 +33,7 @@ const ProjectTaskSchema = CollectionSchema(
   serializeWeb: _projectTaskSerializeWeb,
   deserializeWeb: _projectTaskDeserializeWeb,
   deserializePropWeb: _projectTaskDeserializePropWeb,
-  version: 3,
+  version: 4,
 );
 
 int? _projectTaskGetId(ProjectTask object) {
@@ -54,7 +54,7 @@ List<IsarLinkBase> _projectTaskGetLinks(ProjectTask object) {
 
 void _projectTaskSerializeNative(
     IsarCollection<ProjectTask> collection,
-    IsarRawObject rawObj,
+    IsarCObject cObj,
     ProjectTask object,
     int staticSize,
     List<int> offsets,
@@ -64,18 +64,21 @@ void _projectTaskSerializeNative(
   final _date = value0;
   final value1 = object.duration;
   final _duration = value1;
-  final value2 = object.name;
-  final _name = IsarBinaryWriter.utf8Encoder.convert(value2);
+  final value2 = object.estimate;
+  final _estimate = value2;
+  final value3 = object.name;
+  final _name = IsarBinaryWriter.utf8Encoder.convert(value3);
   dynamicSize += (_name.length) as int;
   final size = staticSize + dynamicSize;
 
-  rawObj.buffer = alloc(size);
-  rawObj.buffer_length = size;
-  final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
+  cObj.buffer = alloc(size);
+  cObj.buffer_length = size;
+  final buffer = IsarNative.bufAsBytes(cObj.buffer, size);
   final writer = IsarBinaryWriter(buffer, staticSize);
   writer.writeDateTime(offsets[0], _date);
   writer.writeLong(offsets[1], _duration);
-  writer.writeBytes(offsets[2], _name);
+  writer.writeLong(offsets[2], _estimate);
+  writer.writeBytes(offsets[3], _name);
 }
 
 ProjectTask _projectTaskDeserializeNative(
@@ -86,8 +89,9 @@ ProjectTask _projectTaskDeserializeNative(
   final object = ProjectTask();
   object.date = reader.readDateTime(offsets[0]);
   object.duration = reader.readLong(offsets[1]);
+  object.estimate = reader.readLong(offsets[2]);
   object.id = id;
-  object.name = reader.readString(offsets[2]);
+  object.name = reader.readString(offsets[3]);
   return object;
 }
 
@@ -101,6 +105,8 @@ P _projectTaskDeserializePropNative<P>(
     case 1:
       return (reader.readLong(offset)) as P;
     case 2:
+      return (reader.readLong(offset)) as P;
+    case 3:
       return (reader.readString(offset)) as P;
     default:
       throw 'Illegal propertyIndex';
@@ -113,6 +119,7 @@ dynamic _projectTaskSerializeWeb(
   IsarNative.jsObjectSet(
       jsObj, 'date', object.date.toUtc().millisecondsSinceEpoch);
   IsarNative.jsObjectSet(jsObj, 'duration', object.duration);
+  IsarNative.jsObjectSet(jsObj, 'estimate', object.estimate);
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
   IsarNative.jsObjectSet(jsObj, 'name', object.name);
   return jsObj;
@@ -129,6 +136,8 @@ ProjectTask _projectTaskDeserializeWeb(
       : DateTime.fromMillisecondsSinceEpoch(0);
   object.duration =
       IsarNative.jsObjectGet(jsObj, 'duration') ?? double.negativeInfinity;
+  object.estimate =
+      IsarNative.jsObjectGet(jsObj, 'estimate') ?? double.negativeInfinity;
   object.id = IsarNative.jsObjectGet(jsObj, 'id');
   object.name = IsarNative.jsObjectGet(jsObj, 'name') ?? '';
   return object;
@@ -145,6 +154,9 @@ P _projectTaskDeserializePropWeb<P>(Object jsObj, String propertyName) {
           : DateTime.fromMillisecondsSinceEpoch(0)) as P;
     case 'duration':
       return (IsarNative.jsObjectGet(jsObj, 'duration') ??
+          double.negativeInfinity) as P;
+    case 'estimate':
+      return (IsarNative.jsObjectGet(jsObj, 'estimate') ??
           double.negativeInfinity) as P;
     case 'id':
       return (IsarNative.jsObjectGet(jsObj, 'id')) as P;
@@ -315,6 +327,56 @@ extension ProjectTaskQueryFilter
   }) {
     return addFilterConditionInternal(FilterCondition.between(
       property: 'duration',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+    ));
+  }
+
+  QueryBuilder<ProjectTask, ProjectTask, QAfterFilterCondition> estimateEqualTo(
+      int value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'estimate',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<ProjectTask, ProjectTask, QAfterFilterCondition>
+      estimateGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'estimate',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<ProjectTask, ProjectTask, QAfterFilterCondition>
+      estimateLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'estimate',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<ProjectTask, ProjectTask, QAfterFilterCondition> estimateBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'estimate',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -503,6 +565,14 @@ extension ProjectTaskQueryWhereSortBy
     return addSortByInternal('duration', Sort.desc);
   }
 
+  QueryBuilder<ProjectTask, ProjectTask, QAfterSortBy> sortByEstimate() {
+    return addSortByInternal('estimate', Sort.asc);
+  }
+
+  QueryBuilder<ProjectTask, ProjectTask, QAfterSortBy> sortByEstimateDesc() {
+    return addSortByInternal('estimate', Sort.desc);
+  }
+
   QueryBuilder<ProjectTask, ProjectTask, QAfterSortBy> sortById() {
     return addSortByInternal('id', Sort.asc);
   }
@@ -538,6 +608,14 @@ extension ProjectTaskQueryWhereSortThenBy
     return addSortByInternal('duration', Sort.desc);
   }
 
+  QueryBuilder<ProjectTask, ProjectTask, QAfterSortBy> thenByEstimate() {
+    return addSortByInternal('estimate', Sort.asc);
+  }
+
+  QueryBuilder<ProjectTask, ProjectTask, QAfterSortBy> thenByEstimateDesc() {
+    return addSortByInternal('estimate', Sort.desc);
+  }
+
   QueryBuilder<ProjectTask, ProjectTask, QAfterSortBy> thenById() {
     return addSortByInternal('id', Sort.asc);
   }
@@ -565,6 +643,10 @@ extension ProjectTaskQueryWhereDistinct
     return addDistinctByInternal('duration');
   }
 
+  QueryBuilder<ProjectTask, ProjectTask, QDistinct> distinctByEstimate() {
+    return addDistinctByInternal('estimate');
+  }
+
   QueryBuilder<ProjectTask, ProjectTask, QDistinct> distinctById() {
     return addDistinctByInternal('id');
   }
@@ -583,6 +665,10 @@ extension ProjectTaskQueryProperty
 
   QueryBuilder<ProjectTask, int, QQueryOperations> durationProperty() {
     return addPropertyNameInternal('duration');
+  }
+
+  QueryBuilder<ProjectTask, int, QQueryOperations> estimateProperty() {
+    return addPropertyNameInternal('estimate');
   }
 
   QueryBuilder<ProjectTask, int?, QQueryOperations> idProperty() {

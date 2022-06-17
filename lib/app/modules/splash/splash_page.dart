@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -14,13 +14,20 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     const Duration(milliseconds: 300);
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        Modular.to.navigate('/login');
-      } else {
-        Modular.to.navigate('/home');
-      }
-    });
+    Future.delayed(
+      const Duration(milliseconds: 2000),
+      () {
+        FirebaseAuth.instance.authStateChanges().listen(
+          (User? user) {
+            if (user == null) {
+              Modular.to.navigate('/login');
+            } else {
+              Modular.to.navigate('/home');
+            }
+          },
+        );
+      },
+    );
   }
 
   @override

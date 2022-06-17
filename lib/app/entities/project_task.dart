@@ -8,5 +8,6 @@ class ProjectTask {
   int? id;
   late String name;
   late int duration;
+  late int estimate;
   late DateTime date = DateTime.now();
 }
